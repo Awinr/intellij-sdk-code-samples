@@ -36,34 +36,33 @@
 
   <actions>
     <!--
-      See https://plugins.jetbrains.com/docs/intellij/basic-action-system.html#registering-actions
-      for information about the elements and attributes used for actions and groups.
+     请参阅 https://plugins.jetbrains.com/docs/intellij/basic-action-system.html#registering-actions
+      有关用于操作和组的元素和属性的信息。
 
-      This <action> element adds a static menu item in first position of the Tools menu that shows PopupDialogAction.
-      Note this element has no text or description attributes because translations for them are given
-      by action-id in the resource-bundle.
-      An <override-text> element is also used for demonstration purposes to show alternate text and description strings
-      for this action's entries in the MainMenu. (Which includes the ToolsMenu. Try commenting out the override-text
-      element and see how the menu text changes.) The alternate text and description attributes do not
-      appear here because they are defined by action-id in the resource-bundle.
+      此 <action> 元素在显示 PopupDialogAction 的“工具”菜单的第一个位置添加一个静态菜单项。
+      请注意，此元素没有文本或描述属性，因为已给出它们的翻译
+      通过资源包中的操作 ID。
+      <override-text> 元素还用于演示目的，以显示替代文本和描述字符串
+      主菜单中此操作的条目。 （其中包括工具菜单。尝试注释掉覆盖文本
+      元素并查看菜单文本如何变化。）替代文本和描述属性不
+      出现在这里是因为它们是由资源包中的 action-id 定义的。
     -->
     <action id="org.intellij.sdk.action.PopupDialogAction" class="org.intellij.sdk.action.PopupDialogAction"
             text="Action Basics Plugin: Pop Dialog Action" description="SDK action example"
             icon="SdkIcons.Sdk_default_icon">
       <add-to-group group-id="ToolsMenu" anchor="first"/>
+      <!-- 即双击shift弹出时的文本 -->
       <override-text place="MainMenu" text="Pop Dialog Action"/>
       <keyboard-shortcut first-keystroke="control alt A" second-keystroke="C" keymap="$default"/>
       <mouse-shortcut keystroke="control button3 doubleClick" keymap="$default"/>
     </action>
     <!--
-      All of the following menu groups add the action PopupDialogAction to menus in different ways.
-      Note that even though these groups reuse the same action class, in each use the action ids are unique.
+      以下所有菜单组都以不同的方式将 PopupDialogAction 操作添加到菜单中。
+      请注意，即使这些组重复使用相同的操作类，但每次使用时操作 ID 都是唯一的。
 
-      GroupedActions demonstrates declaring an action group using the default ActionGroup implementation provided by the
-      IntelliJ Platform framework. (Note the lack of a group "class" attribute.) GroupedActions gets inserted after
-      PopupDialogAction in the Tools menu. Because the group's implementation is default, it cannot impose
-      enable/disable conditions. Instead it must rely on the conditions imposed by the parent menu where it is inserted.
-      It declares one action in the group.
+      GroupedActions 演示了使用由 IntelliJ 平台框架。 （请注意缺少组“类”属性。）GroupedActions 被插入到
+      工具菜单中的 PopupDialogAction。因为该组的实现是默认的，所以它不能强加启用/禁用条件。相反，它必须依赖于插入它的父菜单所施加的条件。
+      它声明了组中的一项操作。
     -->
     <group id="org.intellij.sdk.action.GroupedActions"
            text="Static Grouped Actions" description="SDK statically grouped action example"
@@ -75,26 +74,30 @@
       </action>
     </group>
     <!--
-      CustomDefaultActionGroup demonstrates declaring an action group based on a ActionGroup class supplied by this
-      plugin. This group is to be inserted atop the Editor Popup Menu. It declares one action in the group.
-      The group and action implementations are internationalized, so their declarations do not use the text or
-      description attributes. Instead, the information is defined in the BasicActionsBundle.
-    -->
-    <group id="org.intellij.sdk.action.CustomDefaultActionGroup"
-           class="org.intellij.sdk.action.CustomDefaultActionGroup"
-           popup="true">
-      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-      <action id="org.intellij.sdk.action.CustomGroupedAction" class="org.intellij.sdk.action.PopupDialogAction"
-              icon="SdkIcons.Sdk_default_icon"/>
-    </group>
-    <!--
-      DynamicActionGroup demonstrates declaring an action group without a static action declaration.
-      An action is added to the group programmatically in the DynamicActionGroup implementation.
+      DynamicActionGroup 演示了在没有静态操作声明的情况下声明操作组。
+      在 DynamicActionGroup 实现中以编程方式将操作添加到组中。
     -->
     <group id="org.intellij.sdk.action.DynamicActionGroup" class="org.intellij.sdk.action.DynamicActionGroup"
            popup="true" text="Dynamically Grouped Actions" description="SDK dynamically grouped action example"
            icon="SdkIcons.Sdk_default_icon">
       <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="org.intellij.sdk.action.GroupedActions"/>
+    </group>
+
+
+    <!--
+      声明一个操作组，该组将被插入到编辑器右键弹出菜单的顶部。它声明了组中的一项操作。
+      这个group的 text 和 description 定义在了BasicActionsBundle.properties中
+    -->
+    <group id="org.intellij.sdk.action.CustomDefaultActionGroup"
+           class="org.intellij.sdk.action.CustomDefaultActionGroup"
+           popup="true">
+      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+      <!--
+        组内的一个操作
+        这个action的 text 和 description 定义在了BasicActionsBundle.properties中
+       -->
+      <action id="org.intellij.sdk.action.CustomGroupedAction" class="org.intellij.sdk.action.PopupDialogAction"
+              icon="SdkIcons.Sdk_default_icon"/>
     </group>
   </actions>
 

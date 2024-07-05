@@ -9,19 +9,19 @@ import icons.SdkIcons;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Demonstrates adding an action group to a menu statically in plugin.xml, and then creating a menu item within
- * the group at runtime. See plugin.xml for the declaration of {@link DynamicActionGroup}, and note the group
- * declaration does not contain an action. {@link DynamicActionGroup} is based on {@link ActionGroup} because menu
- * children are determined on rules other than just positional constraints.
+ * 演示在plugin.xml中静态地将操作组添加到菜单，然后在其中创建菜单项
+ * 运行时的组。请参阅plugin.xml以获取{@link DynamicActionGroup}的声明，并记下该组
+ * 声明不包含操作。 {@link DynamicActionGroup} 基于 {@link ActionGroup}，因为菜单
+ * 孩子的决定取决于规则，而不仅仅是位置限制。
  */
 public class DynamicActionGroup extends ActionGroup {
 
-  /**
-   * Returns an array of menu actions for the group.
+/**
+   * 返回该组的菜单操作数组。
    *
-   * @param e Event received when the associated group-id menu is chosen.
-   * @return AnAction[] An instance of {@link AnAction}, in this case containing a single instance of the
-   * {@link PopupDialogAction} class.
+   * @param e 选择关联的组 ID 菜单时收到的事件。
+   * @return AnAction[] {@link AnAction} 的实例，在本例中包含
+   * {@link PopupDialogAction} 类。
    */
   @Override
   public AnAction @NotNull [] getChildren(AnActionEvent e) {

@@ -15,10 +15,10 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * Action class to demonstrate how to interact with the IntelliJ Platform.
- * The only action this class performs is to provide the user with a popup dialog as feedback.
- * Typically this class is instantiated by the IntelliJ Platform framework based on declarations
- * in the plugin.xml file. But when added at runtime this class is instantiated by an action group.
+ * 演示如何与 IntelliJ 平台交互的操作类.
+ * 该类执行的唯一操作是向用户提供弹出对话框作为反馈。
+ * 通常此类由 IntelliJ Platform 框架根据声明进行实例化
+ * 在plugin.xml 文件中。但是，当在运行时添加时，该类将由操作组实例化
  */
 public class PopupDialogAction extends AnAction {
 
@@ -28,21 +28,21 @@ public class PopupDialogAction extends AnAction {
   }
 
   /**
-   * This default constructor is used by the IntelliJ Platform framework to instantiate this class based on plugin.xml
-   * declarations. Only needed in {@link PopupDialogAction} class because a second constructor is overridden.
+   * IntelliJ Platform 框架使用此默认构造函数基于plugin.xml 实例化此类
+   * 声明。仅在 {@link PopupDialogAction} 类中需要，因为第二个构造函数被覆盖。
    */
   public PopupDialogAction() {
     super();
   }
 
   /**
-   * This constructor is used to support dynamically added menu actions.
-   * It sets the text, description to be displayed for the menu item.
-   * Otherwise, the default AnAction constructor is used by the IntelliJ Platform.
+   * 该构造函数用于支持动态添加的菜单操作。
+   * 它设置菜单项要显示的文本和描述。
+   * 否则，IntelliJ 平台将使用默认的 AnAction 构造函数。
    *
-   * @param text        The text to be displayed as a menu item.
-   * @param description The description of the menu item.
-   * @param icon        The icon to be used with the menu item.
+   * @param text        要显示为菜单项的文本。
+   * @param description 菜单项的描述。
+   * @param icon        与菜单项一起使用的图标。
    */
   public PopupDialogAction(@Nullable String text, @Nullable String description, @Nullable Icon icon) {
     super(text, description, icon);
@@ -50,16 +50,16 @@ public class PopupDialogAction extends AnAction {
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent event) {
-    // Using the event, create and show a dialog
+    // 使用该事件，创建并显示一个对话框
     Project currentProject = event.getProject();
     StringBuilder message =
         new StringBuilder(event.getPresentation().getText() + " Selected!");
-    // If an element is selected in the editor, add info about it.
+    // 如果在编辑器中选择了某个元素，请添加有关它的信息。
     Navigatable selectedElement = event.getData(CommonDataKeys.NAVIGATABLE);
     if (selectedElement != null) {
       message.append("\nSelected Element: ").append(selectedElement);
     }
-    String title = event.getPresentation().getDescription();
+    String title = "我是一个标题";
     Messages.showMessageDialog(
         currentProject,
         message.toString(),
@@ -69,7 +69,7 @@ public class PopupDialogAction extends AnAction {
 
   @Override
   public void update(AnActionEvent e) {
-    // Set the availability based on whether a project is open
+    // 根据项目是否开放设置可用性
     Project project = e.getProject();
     e.getPresentation().setEnabledAndVisible(project != null);
   }

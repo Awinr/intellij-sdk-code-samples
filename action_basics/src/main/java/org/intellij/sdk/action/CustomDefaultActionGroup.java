@@ -11,7 +11,7 @@ import icons.SdkIcons;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Creates an action group to contain menu actions. See plugin.xml declarations.
+ * 创建一个动作组来包含菜单动作。参见 plugin.xml 的声明。
  */
 public class CustomDefaultActionGroup extends DefaultActionGroup {
 
@@ -21,18 +21,18 @@ public class CustomDefaultActionGroup extends DefaultActionGroup {
   }
 
   /**
-   * Given {@link CustomDefaultActionGroup} is derived from {@link com.intellij.openapi.actionSystem.ActionGroup},
-   * in this context {@code update()} determines whether the action group itself should be enabled or disabled.
-   * Requires an editor to be active in order to enable the group functionality.
+   * 由于 {@link CustomDefaultActionGroup} 是从 {@link com.intellij.openapi.actionSystem.ActionGroup} 派生的，
+   * 在这个上下文中，{@code update()} 方法确定动作组本身是否应该启用或禁用。
+   * 需要活动的编辑器才能启用该组的功能。
    *
-   * @param event Event received when the associated group-id menu is chosen.
+   * @param event 当选择关联的组 ID 菜单时接收到的事件。
    */
   @Override
   public void update(AnActionEvent event) {
-    // Enable/disable depending on whether user is editing
+    // 根据用户是否正在编辑来启用/禁用
     Editor editor = event.getData(CommonDataKeys.EDITOR);
     event.getPresentation().setEnabled(editor != null);
-    // Take this opportunity to set an icon for the group.
+    // 利用这个机会为组设置一个图标。
     event.getPresentation().setIcon(SdkIcons.Sdk_default_icon);
   }
 
